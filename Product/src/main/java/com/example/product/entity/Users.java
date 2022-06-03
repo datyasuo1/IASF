@@ -1,10 +1,9 @@
-package com.example.hello_spring.entity;
+package com.example.product.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,12 +12,12 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @AllArgsConstructor
+@ToString
 @Builder
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "users")
+public class Users {
     @Id
     private String id;
     private String name;
@@ -29,5 +28,4 @@ public class Student {
 
     @UpdateTimestamp
     private Date updatedAt;
-
 }
