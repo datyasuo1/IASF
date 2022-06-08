@@ -373,6 +373,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">List Product</h6>
+                            <a href="/page/products/createProducts.html">Create New Products<a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -500,7 +501,7 @@
                 }
             
             }
-            xmlHttpRequest.open('DELETE', 'https://datproducts-springboot.herokuapp.com/api/v1/products/{id}',false)
+            xmlHttpRequest.open('DELETE', `https://datproducts-springboot.herokuapp.com/api/v1/products/${id}`,false)
             xmlHttpRequest.send();
         }
         function loadData(){

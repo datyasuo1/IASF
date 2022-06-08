@@ -113,11 +113,11 @@
     <!-- Custom scripts for all pages-->
     <script src="../../content/js/sb-admin-2.min.js"></script>
     <script>
-        function getParameterFromUrl(parameterName){
-            var url_string = window.location.href
-            var url = new URL(url_string);
-            return url.searchParams.get(parameterName);
-        }
+       function getParametterUrl(parameterName){
+        var url_string = window.location.href
+        var url = new URL(url_string);
+        return url.searchParams.get(parameterName);
+    }
         //chờ page load hết mớ bắt đầu thực thi javascrip
         document.addEventListener('DOMContentLoaded',function(){
             var btnSumit = document.forms['create-product']['btn-submit'];
@@ -132,10 +132,10 @@
             var txtuserUp = document.forms['create-product']['userUp'];
             var txtuserDel = document.forms['create-product']['userDel'];
             //load data by id
-            var id = getParameterFromUrl('id');
-            var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.onreadystatechange= function(){
-                if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+            var id = getParametterUrl('id');
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange = function(){
+            if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
                     //du lieu dc tra ve thanh cong
                 var contentText = '';
                 var element = JSON.parse(xmlHttpRequest.responseText);
@@ -151,7 +151,7 @@
                 txtuserDel.value = element.userDel;    
                 }
             }
-            xmlHttpRequest.open('GET', 'https://datproducts-springboot.herokuapp.com/api/v1/products/A01',false);
+            xmlHttpRequest.open('GET', `https://datproducts-springboot.herokuapp.com/api/v1/products/${id}`,false);
             xmlHttpRequest.send();
             if(btnSumit){
                 btnSumit.onclick = function(event){
@@ -179,8 +179,15 @@
                         "userDel" : userDel              
 
                     }
-                    
-                    xmlHttpRequest.open('PUT', 'https://datproducts-springboot.herokuapp.com/api/v1/products/{id}',false)
+                    var dataToSend = JSON.stringify(obj);
+                    var xmlHttpRequest = new XMLHttpRequest();
+                    xmlHttpRequest.onreadystatechange = function(){
+            if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
+                    alert('Action complete');
+                    window.location.href=`/page/products/list.html`;
+                }
+            }
+                    xmlHttpRequest.open('PUT', `https://datproducts-springboot.herokuapp.com/api/v1/products/${id}`,false)
                     xmlHttpRequest.setRequestHeader('Content-Type','application/json');
                     xmlHttpRequest.send(dataToSend);
                         }
