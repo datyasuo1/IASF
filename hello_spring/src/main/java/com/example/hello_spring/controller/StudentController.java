@@ -18,7 +18,7 @@ import java.util.Optional;
  * http://localhost:8080/api/v1/students/1 |PUT| update student
  *
  **/
-
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(path = "api/v1/students")
 public class StudentController {

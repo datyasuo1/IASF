@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/products")
+@CrossOrigin(value = "*")
 public class ProductController {
     @Autowired
     ProductService productService;
