@@ -473,9 +473,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../../content/js/demo/datatables-demo.js"></script>
-</body>
 
-</html>
     <script>
         //chờ page load hết mớ bắt đầu thực thi javascrip
         document.addEventListener('DOMContentLoaded',function(){
@@ -488,9 +486,10 @@
                 const element = listBtnDelete[i];
                 element.onclick = function(e){
                     e.preventDefault();
-                    if(confirm('Are you sure')){
+                    if(confirm('Are you sure ?')){
                         var id = this.getAttribute('data-id')
                         handleDeleteById(id)
+
                     }
                 }
             }
@@ -499,23 +498,23 @@
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange=function(){
                 if(xmlHttpRequest.readyState==4 && xmlHttpRequest.status == 200){
-                    alert('Acction success');
+                    alert('Acction success')
                     window.location.reload();
                 }
             
             }
-            xmlHttpRequest.open('DELETE', `https://datproducts-springboot.herokuapp.com/api/v1/products/${id}`,false)
+            xmlHttpRequest.open('DELETE', `https://datproducts-springboot.herokuapp.com/api/v1/products/${id}`,false);
             xmlHttpRequest.send();
         }
-        function loadData(){
-            var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.onreadystatechange= function(){
-                if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200){
-                    //du lieu dc tra ve thanh cong
-                    var contentText = '';
-                    var jsonResult = JSON.parse(xmlHttpRequest.responseText);
-                    for (let i = 0; i < jsonResult.length; i++) {
-                        const element = jsonResult[i];
+        function loadData() {
+        var xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.onreadystatechange = function () {
+            if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                // dữ liệu được trả về thành công.
+                var contentText = '';
+                var jsonResult = JSON.parse(xmlHttpRequest.responseText);
+                for (let i = 0; i < jsonResult.length; i++) {
+                    const element = jsonResult[i];
                         contentText += 
                         `<tr>
                             <td>${element.id}</td>
@@ -528,7 +527,7 @@
                             <td>
                                 <a href="/page/products/detail.html?id=${element.id}" class="fas fa-info-circle">
                                 <a href="/page/products/editProducts.html?id=${element.id}" class="fas fa-clipboard-list">
-                                <a data-id="${element.id}" href="/delete.html" class="fas fa-trash" class="btn-delete">
+                                <a data-id="${element.id}" onClick = handleDeleteClick(${element.id})  class="fas fa-trash" class="btn-delete">
                             </td>
                          </tr>`  
                     }
@@ -542,3 +541,7 @@
             xmlHttpRequest.send();
         }
     </script>
+</body>
+
+</html>
+   
